@@ -25,8 +25,13 @@ function writeFilePromise(fileLocation, result) {
 async function getRobopic() {
     try {
         const res = await superagent.get(`https://robohash.org/${generateString(8)}`)
-        console.log('Random image is ', res.request.url)
-        await writeFilePromise('./robotImage.txt', res.request.url)
+        const res2 = await superagent.get(`https://robohash.org/${generateString(8)}`)
+      const res3 = await superagent.get(`https://robohash.org/${generateString(8)}`)
+        //console.log('Random image is ', res.request.url)
+        const all = await Promise.all([res,res2,res3]) //to show all imgs details
+        const images = all.map((img)=>img.request.url) // map holds key values
+        console.log(images)
+        await writeFilePromise('./robotImage.txt',images.join("\n")) // join for concatenating all elements in an array 
         console.log('sucessfully written the file')
     } catch (err) {
         throw err

@@ -39,7 +39,7 @@ console.log('1. start')
             await getRobopic()
             console.log('3. end')
         } catch (err) {
-            console.log('3. end due to error')
+            console.log('3. error')
         }
     })()
 
